@@ -19,20 +19,16 @@ def clear():
     entry.delete(0, END)
     pass_entry.delete(0, END)
 
-
 def submit():
     pass_length = entry.get()
-    print(type(pass_length))
-
     try:
-
         if len(pass_length) == 0:
-
             messagebox.showerror(title="Missing Value",
                                  message="Entry box can't be empty, "
                                          "\nmin. legth of password is 1.")
             main_window.focus_set()
             entry.focus_set()
+
             return False
 
         elif int(pass_length) > 16:
@@ -41,6 +37,7 @@ def submit():
                                             "max. 16 characters.")
             main_window.focus_set()
             entry.focus_set()
+
             return False
 
         elif int(pass_length) <= 0:
@@ -49,6 +46,7 @@ def submit():
 
             main_window.focus_set()
             entry.focus_set()
+
             return False
 
         else:
@@ -60,8 +58,8 @@ def submit():
                                          "\nplease type correct integer")
             main_window.focus_set()
             entry.focus_set()
-            return False
 
+            return False
 
 def generate():
     password1 = password_generator()
@@ -69,17 +67,15 @@ def generate():
 
 main_window = Tk()
 main_window.title("Password generator by Igor")
-# main_window.geometry("1000x500")
-
 main_window_width = 1000
 main_window_height = 500
-screen_width = main_window.winfo_screenwidth() #pobranie info o szerokości używanego ekranu
-screen_height = main_window.winfo_screenheight() #pobranie info o wysokości ekranu
+screen_width = main_window.winfo_screenwidth()
+screen_height = main_window.winfo_screenheight()
 
-x = int((screen_width/2) - (main_window_width/2)) #dodatkowe zmienne na pozycjonowanie środka ekranu
+x = int((screen_width/2) - (main_window_width/2))
 y = int((screen_height/2) - (main_window_height/2))
 
-main_window.geometry("{}x{}+{}+{}".format(main_window_width, main_window_height, x, y)) #rozmiar okna oraz odpowiednie przesuniecie
+main_window.geometry("{}x{}+{}+{}".format(main_window_width, main_window_height, x, y))
 
 start_label = Label(main_window, text="GUI password generator.", bd=5, font=("Arial", 30, "bold"),
                     pady=20, padx=20, relief=RAISED)

@@ -22,40 +22,45 @@ def clear():
 
 def submit():
     pass_length = entry.get()
+    print(type(pass_length))
 
-    if int(pass_length) > 16:
-        messagebox.showwarning(title= "Warning",
-                               message= "Password is longer than needed, this program version handle only "
-                                        "max. 16 characters.")
-        main_window.focus_set()
-        entry.focus_set()
-        return False
+    try:
 
-    elif int(pass_length) < 0:
-        messagebox.showerror(title="Value Error",
-                             message="Password length can't be negative value, please type correct integer")
+        if len(pass_length) == 0:
 
-        main_window.focus_set()
-        entry.focus_set()
-        return False
-# TO DO:
+            messagebox.showerror(title="Missing Value",
+                                 message="Entry box can't be empty, "
+                                         "\nmin. legth of password is 1.")
+            main_window.focus_set()
+            entry.focus_set()
+            return False
 
-    # elif pass_length == " ":
-    #     messagebox.showerror(title="Missing Value",
-    #                          message="Entry box can't be empty, min. legth of password is 1.")
-    #     main_window.focus_set()
-    #     entry.focus_set()
-    #     return False
+        elif int(pass_length) > 16:
+            messagebox.showwarning(title="Length Error",
+                                   message="Password is longer than needed, this program version handle only "
+                                            "max. 16 characters.")
+            main_window.focus_set()
+            entry.focus_set()
+            return False
 
-    # elif isinstance(pass_length, str):
-    #     messagebox.showerror(title="Type Error",
-    #                          message="Length of password can't a string value, please type correct integer")
-    #     main_window.focus_set()
-    #     entry.focus_set()
-    #     return False
+        elif int(pass_length) <= 0:
+            messagebox.showerror(title="Length Error",
+                                 message="Password length must be longer than 0 characters")
 
-    else:
-        return pass_length
+            main_window.focus_set()
+            entry.focus_set()
+            return False
+
+        else:
+            return pass_length
+
+    except ValueError:
+            messagebox.showerror(title="Type Error",
+                                 message="Length of password can't be a string value, "
+                                         "\nplease type correct integer")
+            main_window.focus_set()
+            entry.focus_set()
+            return False
 
 
 def generate():

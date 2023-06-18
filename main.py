@@ -1,5 +1,6 @@
 import random
 from tkinter import *
+from tkinter import messagebox
 
 def password_generator():
     pass_entry.delete(0, END)
@@ -21,7 +22,40 @@ def clear():
 
 def submit():
     pass_length = entry.get()
-    return pass_length
+
+    if int(pass_length) > 16:
+        messagebox.showwarning(title= "Warning",
+                               message= "Password is longer than needed, this program version handle only "
+                                        "max. 16 characters.")
+        main_window.focus_set()
+        entry.focus_set()
+        return False
+
+    elif int(pass_length) < 0:
+        messagebox.showerror(title="Value Error",
+                             message="Password length can't be negative value, please type correct integer")
+
+        main_window.focus_set()
+        entry.focus_set()
+        return False
+# TO DO:
+
+    # elif pass_length == " ":
+    #     messagebox.showerror(title="Missing Value",
+    #                          message="Entry box can't be empty, min. legth of password is 1.")
+    #     main_window.focus_set()
+    #     entry.focus_set()
+    #     return False
+
+    # elif isinstance(pass_length, str):
+    #     messagebox.showerror(title="Type Error",
+    #                          message="Length of password can't a string value, please type correct integer")
+    #     main_window.focus_set()
+    #     entry.focus_set()
+    #     return False
+
+    else:
+        return pass_length
 
 
 def generate():
@@ -30,7 +64,17 @@ def generate():
 
 main_window = Tk()
 main_window.title("Password generator by Igor")
-main_window.geometry("1000x500")
+# main_window.geometry("1000x500")
+
+main_window_width = 1000
+main_window_height = 500
+screen_width = main_window.winfo_screenwidth() #pobranie info o szerokości używanego ekranu
+screen_height = main_window.winfo_screenheight() #pobranie info o wysokości ekranu
+
+x = int((screen_width/2) - (main_window_width/2)) #dodatkowe zmienne na pozycjonowanie środka ekranu
+y = int((screen_height/2) - (main_window_height/2))
+
+main_window.geometry("{}x{}+{}+{}".format(main_window_width, main_window_height, x, y)) #rozmiar okna oraz odpowiednie przesuniecie
 
 start_label = Label(main_window, text="GUI password generator.", bd=5, font=("Arial", 30, "bold"),
                     pady=20, padx=20, relief=RAISED)
@@ -57,15 +101,15 @@ pass_label.grid(row=0, column=0)
 submit_button = Button(passFrame, text="Submit", bd=3, font=("Times New Roman", 30), command=generate)
 submit_button.grid(row=0, column=2)
 
-entry = Entry(passFrame, font= ("Arial", 30), fg="#00FF00")
+entry = Entry(passFrame, font= ("Arial", 30))
 entry.grid(row=0, column=1)
+entry.focus_set()
 
 label3 = Label(passFrame, text= "Your password: ", bd=3, font=("Times New Roman", 30))
 label3.grid(row=1, column=0)
 
 pass_entry = Entry(passFrame, font=("Arial", 30, "bold"))
-
-pass_entry.grid(row=1, column=1)
+pass_entry.grid(row=1, column=1, sticky='nesw')
 
 
 main_window.mainloop()

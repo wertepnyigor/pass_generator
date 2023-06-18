@@ -20,9 +20,9 @@ def clear():
     entry_password.delete(0, END)
 
 def submit():
-    pass_length = length_password.get()
+    password_length = length_password.get()
     try:
-        if len(pass_length) == 0:
+        if len(password_length) == 0:
             messagebox.showerror(title="Missing Value",
                                  message="Entry box can't be empty, "
                                          "\nmin. legth of password is 1.")
@@ -31,7 +31,7 @@ def submit():
 
             return False
 
-        elif int(pass_length) > 16:
+        elif int(password_length) > 16:
             messagebox.showwarning(title="Length Error",
                                    message="Password is longer than needed, this program version handle only "
                                             "max. 16 characters.")
@@ -40,7 +40,7 @@ def submit():
 
             return False
 
-        elif int(pass_length) <= 0:
+        elif int(password_length) <= 0:
             messagebox.showerror(title="Length Error",
                                  message="Password length must be longer than 0 characters")
 
@@ -50,7 +50,7 @@ def submit():
             return False
 
         else:
-            return pass_length
+            return password_length
 
     except ValueError:
             messagebox.showerror(title="Type Error",

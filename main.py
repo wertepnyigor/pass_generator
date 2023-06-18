@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 
 def password_generator():
-    pass_entry.delete(0, END)
+    entry_password.delete(0, END)
     lower = 'abcdefghijklmnopqrstuvwxyz'
     higher = lower.upper()
     numbers = "0123456789"
@@ -16,18 +16,18 @@ def password_generator():
     return password
 
 def clear():
-    entry.delete(0, END)
-    pass_entry.delete(0, END)
+    length_password.delete(0, END)
+    entry_password.delete(0, END)
 
 def submit():
-    pass_length = entry.get()
+    pass_length = length_password.get()
     try:
         if len(pass_length) == 0:
             messagebox.showerror(title="Missing Value",
                                  message="Entry box can't be empty, "
                                          "\nmin. legth of password is 1.")
             main_window.focus_set()
-            entry.focus_set()
+            length_password.focus_set()
 
             return False
 
@@ -36,7 +36,7 @@ def submit():
                                    message="Password is longer than needed, this program version handle only "
                                             "max. 16 characters.")
             main_window.focus_set()
-            entry.focus_set()
+            length_password.focus_set()
 
             return False
 
@@ -45,7 +45,7 @@ def submit():
                                  message="Password length must be longer than 0 characters")
 
             main_window.focus_set()
-            entry.focus_set()
+            length_password.focus_set()
 
             return False
 
@@ -57,13 +57,13 @@ def submit():
                                  message="Length of password can't be a string value, "
                                          "\nplease type correct integer")
             main_window.focus_set()
-            entry.focus_set()
+            length_password.focus_set()
 
             return False
 
 def generate():
     password1 = password_generator()
-    pass_entry.insert(10,password1)
+    entry_password.insert(1,password1)
 
 main_window = Tk()
 main_window.title("Password generator by Igor")
@@ -93,24 +93,24 @@ reset_button = Button(controlFrame, text="Reset", bd=3, font=("Times New Roman",
 reset_button.pack(side=RIGHT)
 
 
-passFrame = Frame(main_window)
-passFrame.pack()
+password_Frame = Frame(main_window)
+password_Frame.pack()
 
-pass_label = Label(passFrame, text="Length of your password:", bd=3, font=("Times New Roman", 30))
-pass_label.grid(row=0, column=0)
+label_password = Label(password_Frame, text="Length of your password:", bd=3, font=("Times New Roman", 30))
+label_password.grid(row=0, column=0)
 
-submit_button = Button(passFrame, text="Submit", bd=3, font=("Times New Roman", 30), command=generate)
+submit_button = Button(password_Frame, text="Submit", bd=3, font=("Times New Roman", 30), command=generate)
 submit_button.grid(row=0, column=2)
 
-entry = Entry(passFrame, font= ("Arial", 30))
-entry.grid(row=0, column=1)
-entry.focus_set()
+length_password = Entry(password_Frame, font= ("Arial", 30))
+length_password.grid(row=0, column=1)
+length_password.focus_set()
 
-label3 = Label(passFrame, text= "Your password: ", bd=3, font=("Times New Roman", 30))
+label3 = Label(password_Frame, text= "Your password: ", bd=3, font=("Times New Roman", 30))
 label3.grid(row=1, column=0)
 
-pass_entry = Entry(passFrame, font=("Arial", 30, "bold"))
-pass_entry.grid(row=1, column=1, sticky='nesw')
+entry_password = Entry(password_Frame, font=("Arial", 30, "bold"))
+entry_password.grid(row=1, column=1, sticky='nesw')
 
 
 main_window.mainloop()
